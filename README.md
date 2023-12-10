@@ -31,6 +31,7 @@ You can customize the colors in your styles using CSS variables. Edit the `style
         --link-color: #1a496b;
         --link-hover-color: #1e5799;
 }
+```
 
 ## Nginx Server Configuration
 
