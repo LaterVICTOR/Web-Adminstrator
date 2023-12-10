@@ -17,6 +17,20 @@ Dedicated to administrators, this section facilitates user management, role assi
 
 ### 4. Status
 The status page offers a snapshot of the current system status. It may include crucial metrics, error reports, and real-time updates to keep users informed about the system's health and performance.
+### 5. Styling Customization
+
+You can customize the colors in your styles using CSS variables. Edit the `style.css` file and find the `:root` block to update the color variables.
+
+```css
+:root {
+        --background-color: #e0e8f4;
+        --container-background-color: #d6e6f5;
+        --container-border-color: #a8c0da;
+        --button-background-color: #4d8cc1;
+        --button-hover-color: #306992;
+        --link-color: #1a496b;
+        --link-hover-color: #1e5799;
+}
 
 ## Nginx Server Configuration
 
@@ -118,12 +132,12 @@ server {
     #
     # include snippets/snakeoil.conf;
 
-    root /var/www/proyectos;
+    root /var/www/name;
 
     # Add index.php to the list if you are using PHP
     index index.html index.htm index.php;
 
-    server_name test.latervictor.dev;
+    server_name domain.com;
 
     location / {
         # First attempt to serve request as file, then
