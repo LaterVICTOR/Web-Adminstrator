@@ -211,3 +211,12 @@ server {
 #        try_files $uri $uri/ =404;
 #    }
 #}
+```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md). See the `LICENSE.md` file for details.
+
+## Contact
+
+For further information or inquiries, please contact us at [latervictormc@gmail.com].
