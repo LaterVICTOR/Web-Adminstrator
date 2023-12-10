@@ -46,10 +46,10 @@ HTML;
 }
 
 // Database connection configuration
-$servername = "201.106.88.95";
-$username = "u1_hkKzoF0xtJ";
-$password = "ygzPOVxQU2U=wFk!X8ZXx+ei";
-$dbname = "s1_loginweb";
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "db_name";
 
 // Create connection
 $conexion = new mysqli($servername, $username, $password, $dbname);
@@ -74,9 +74,9 @@ function getMessages() {
 // Function to add a message
 function addMessage($message) {
     global $conexion;
-    $user_name = $_SESSION['nombre_usuario'];
+    $nombre_usuario = $_SESSION['nombre_usuario'];
     $message = $conexion->real_escape_string($message);
-    $query = "INSERT INTO chat_messages (user_name, message_text) VALUES ('$user_name', '$message')";
+    $query = "INSERT INTO chat_messages (nombre_usuario, message_text) VALUES ('$nombre_usuario', '$message')";
     return $conexion->query($query);
 }
 
@@ -129,7 +129,7 @@ $messages = getMessages();
     <div id="chat-container">
         <div id="chat-messages">
             <?php foreach ($messages as $message): ?>
-                <p><strong><?= $message['user_name'] ?>:</strong> <?= $message['message_text'] ?></p>
+                <p><strong><?= $message['nombre_usuario'] ?>:</strong> <?= $message['message_text'] ?></p>
             <?php endforeach; ?>
         </div>
         <form id="chat-form" method="post" action="index.php">

@@ -56,15 +56,15 @@ HTML;
 <body>
     <div class="container">
         <header>
-            <!-- Change profile picture based on user role -->
+            <!-- Change profile picture based on user rol -->
             <?php if ($_SESSION['rol'] === 'admin') { ?>
-                <img src="../imagen_admin.png">
+                <img src="../img/imagen_admin.png">
                 <h1>Welcome Administrator <?php echo $_SESSION['nombre_usuario']; ?></h1>
-                <p>As an administrator, your role is to manage and supervise tasks and projects at Mialu Studios Fin. You have full access to all functionalities and can assign tasks to other team members.</p>
+                <p>As an administrator, your rol is to manage and supervise tasks and projects at Mialu Studios Fin. You have full access to all functionalities and can assign tasks to other team members.</p>
             <?php } elseif ($_SESSION['rol'] === 'member') { ?>
-                <img src="../imagen_member.png">
+                <img src="../img/imagen_member.png">
                 <h1>Welcome Member <?php echo $_SESSION['nombre_usuario']; ?></h1>
-                <p>As a member, your role is to work on projects assigned by administrators and collaborate with other team members. Use this panel to access tasks and projects assigned to you.</p>
+                <p>As a member, your rol is to work on projects assigned by administrators and collaborate with other team members. Use this panel to access tasks and projects assigned to you.</p>
             <?php } ?>
         </header>
         <nav class="menu">

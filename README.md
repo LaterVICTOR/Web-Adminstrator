@@ -13,11 +13,12 @@ The chat feature enables real-time communication among users, fostering quick di
 The configuration zone allows users to customize their experience within the application. Users can adjust preferences, notifications, and other settings based on their individual needs.
 
 ### 3. Admin Zone
-Dedicated to administrators, this section facilitates user management, role assignments, and access to essential administrative tools, providing efficient oversight and control over internal operations.
+Dedicated to administrators, this section facilitates user management, rol assignments, and access to essential administrative tools, providing efficient oversight and control over internal operations.
 
 ### 4. Status
 The status page offers a snapshot of the current system status. It may include crucial metrics, error reports, and real-time updates to keep users informed about the system's health and performance.
-### 5. Styling Customization
+
+## Styling Customization
 
 You can customize the colors in your styles using CSS variables. Edit the `style.css` file and find the `:root` block to update the color variables.
 
@@ -32,6 +33,26 @@ You can customize the colors in your styles using CSS variables. Edit the `style
         --link-hover-color: #1e5799;
 }
 ```
+
+## Database Configuration
+
+This project requires a database to store chat messages and user information. Here are the SQL statements to create the necessary tables:
+
+```sql
+CREATE TABLE chat_messages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    message TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    rol VARCHAR(20) NOT NULL
+);
 
 ## Nginx Server Configuration
 

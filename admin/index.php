@@ -2,8 +2,8 @@
 session_start();
 
 // Check if the user is authenticated in the PHP session
-if ($_SESSION['role'] !== 'admin') {
-    // If the user does not have the administrator role, send a 403 Forbidden response
+if ($_SESSION['rol'] !== 'admin') {
+    // If the user does not have the administrator rol, send a 403 Forbidden response
     http_response_code(403);
 
     // Set the custom HTML message
@@ -49,10 +49,10 @@ HTML;
 }
 
 // Establish a connection to the database (replace values with your own)
-$servername = "201.106.88.95";
-$username = "u1_hkKzoF0xtJ";
-$password = "ygzPOVxQU2U=wFk!X8ZXx+ei";
-$dbname = "s1_loginweb";
+$servername = "localhost";
+$username = "username";
+$password = "password";
+$dbname = "db_name";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -66,10 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_user'])) {
     // Retrieve data from the form
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $role = $_POST['role'];
+    $rol = $_POST['rol'];
 
     // Perform insertion into the database
-    $insertQuery = "INSERT INTO users (name, password, role) VALUES ('$username', '$password', '$role')";
+    $insertQuery = "INSERT INTO users (name, password, rol) VALUES ('$username', '$password', '$rol')";
     if ($conn->query($insertQuery) === TRUE) {
         echo "User added successfully.";
     } else {
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['change_password'])) {
 }
 
 // Query to get the list of users
-$selectQuery = "SELECT id, name, role FROM users";
+$selectQuery = "SELECT id, name, rol FROM users";
 $result = $conn->query($selectQuery);
 ?>
 
@@ -128,7 +128,7 @@ $result = $conn->query($selectQuery);
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <select name="role">
+                <select name="rol">
                     <option value="admin">Admin</option>
                     <option value="member">Member</option>
                 </select>
@@ -159,10 +159,10 @@ $result = $conn->query($selectQuery);
             <!-- Display the list of users -->
             <ul>
                 <?php
-                $result = $conn->query("SELECT id, name, role FROM users");
+                $result = $conn->query("SELECT id, name, rol FROM users");
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        echo "<li>ID: " . $row['id'] . " - Name: " . $row['name'] . " - Role: " . $row['role'] . "</li>";
+                        echo "<li>ID: " . $row['id'] . " - Name: " . $row['name'] . " - rol: " . $row['rol'] . "</li>";
                         // Add form to change password
                         echo "<form action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "' method='post'>";
                         echo "<input type='hidden' name='changed_user_id' value='" . $row['id'] . "'>";

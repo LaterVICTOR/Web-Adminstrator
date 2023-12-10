@@ -40,10 +40,10 @@ HTML;
 // Process the form to change the password
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Set the database connection (replace values with yours)
-    $servername = "201.106.88.95";
-    $username = "u1_hkKzoF0xtJ";
-    $password = "ygzPOVxQU2U=wFk!X8ZXx+ei";
-    $dbname = "s1_loginweb";
+    $servername = "localhost";
+    $username = "username";
+    $password = "password";
+    $dbname = "db_name";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -86,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <div class="container">
         <header>
-            <!-- Change the profile picture based on the user's role -->
+            <!-- Change the profile picture based on the user's rol -->
             <?php if ($_SESSION['rol'] === 'admin') { ?>
                 <!-- Admin profile content -->
             <?php } elseif ($_SESSION['rol'] === 'member') { ?>
