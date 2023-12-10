@@ -1,0 +1,163 @@
+:root {
+        --background-color: #e0e8f4;
+        --container-background-color: #d6e6f5;
+        --container-border-color: #a8c0da;
+        --button-background-color: #4d8cc1;
+        --button-hover-color: #306992;
+        --link-color: #1a496b;
+        --link-hover-color: #1e5799;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--container-background-color);
+    border: 1px solid var(--container-border-color);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+header {
+    background-color: var(--link-color);
+    color: #fff;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0;
+}
+
+.menu {
+    background-color: var(--link-color);
+    padding: 10px 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu ul li {
+    margin: 0 20px;
+}
+
+.menu button {
+    background-color: var(--button-background-color);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menu button:hover {
+    background-color: var(--button-hover-color);
+}
+
+.menu img {
+    max-width: 24px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+}
+
+footer a:hover {
+    color: var(--link-hover-color);
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+form h2 {
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+form input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #555;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.profile-image {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50;
+}
+
+.barra::-webkit-scrollbar-thumb {
+    background: #8d2276;
+}
