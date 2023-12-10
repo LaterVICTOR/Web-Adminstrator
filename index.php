@@ -55,7 +55,7 @@ include 'user_management.php';
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="shortcut icon" href="https://launcher.latervictor.dev/storage/img/favicon.png">
+    <link rel="shortcut icon" href="./favicon.png">
 </head>
 <body>
     <div class="container">

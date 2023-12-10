@@ -13,6 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <html lang="en">
     <head>
         <!-- Meta tags and styles for the Forbidden page -->
+        <link rel="shortcut icon" href="../favicon.png">
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
@@ -81,6 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="shortcut icon" href="../favicon.png">
     <!-- Head content for the Main Menu page -->
 </head>
 <body>

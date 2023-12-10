@@ -11,6 +11,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 <!DOCTYPE html>
 <html lang="en">
     <head>
+    <link rel="shortcut icon" href="../favicon.png">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Forbidden</title>
@@ -98,7 +99,7 @@ $messages = getMessages();
 <head>
     <meta charset="UTF-8">
     <title>Chat - Main Menu</title>
-    <link rel="shortcut icon" href="https://www.mialu.cat/storage/img/favicon.png">
+    <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <style>
         #chat-container {
