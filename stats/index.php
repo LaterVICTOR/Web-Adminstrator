@@ -184,7 +184,7 @@ HTML;
 </div>
         <footer>
             <a href="/home">Volver al Menú Principal</a>
-            <a href="/cerrar_sesion">Cerrar Sesión</a>
+            <a href="/logout">Cerrar Sesión</a>
         </footer>
     </div>
 </footer>
