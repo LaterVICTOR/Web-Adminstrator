@@ -54,6 +54,8 @@ CREATE TABLE users (
     rol VARCHAR(20) NOT NULL
 );
 
+INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admin'); 
+
 ## Nginx Server Configuration
 
 The Nginx server is configured to listen on port 80, with the root directory set to `/var/www/proyectos`. PHP scripts are passed to the FastCGI server, and specific parameters are adjusted to enhance performance and functionality.
