@@ -20,7 +20,7 @@ The status page offers a snapshot of the current system status. It may include c
 
 ## Styling Customization
 
-You can customize the colors in your styles using CSS variables. Edit the `style.css` file and find the `:root` block to update the color variables.
+You can customize the colors in your styles using CSS variables. Edit the `root.css` file and find the `:root` block to update the color variables.
 
 ```css
 :root {
