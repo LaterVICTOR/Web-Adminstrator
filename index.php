@@ -1,53 +1,53 @@
 <?php
 session_start();
 
-// Verificar si el usuario ya está autenticado
+// Check if the user is already authenticated
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    header('Location: /home'); // Redirigir al menú principal si el usuario ya está autenticado
+    header('Location: /home'); // Redirect to the main menu if the user is already authenticated
     exit;
 }
 
-// Verificar si se envió el formulario de inicio de sesión
+// Check if the login form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombre_usuario = $_POST['nombre_usuario'];
-    $contrasena = $_POST['contrasena'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    // Conexión a la base de datos (reemplaza con tus propias credenciales)
-    $mysqli = new mysqli("66.181.33.169", "u1_qTW4RVmuMV", "2rSL8zp1XdjdZ!urGngkoAnN", "s1_webadmin");
+    // Connect to the database (replace with your own credentials)
+    $mysqli = new mysqli("localhost", "username", "password", "db_name");
 
-    // Verificar la conexión a la base de datos
+    // Check the database connection
     if ($mysqli->connect_error) {
-        die("Conexión fallida: " . $mysqli->connect_error);
+        die("Connection failed: " . $mysqli->connect_error);
     }
 
-    // Utilizar consultas preparadas para evitar la inyección SQL
+    // Use prepared statements to prevent SQL injection
     $query = "SELECT nombre, contrasena, rol FROM usuarios WHERE nombre = ? AND contrasena = ?";
     $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("ss", $nombre_usuario, $contrasena);
+    $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Autenticación exitosa, establecer una sesión como usuario autenticado
-        $usuario = $result->fetch_assoc();
+        // Successful authentication, set a session as an authenticated user
+        $user = $result->fetch_assoc();
         $_SESSION['loggedin'] = true;
-        $_SESSION['nombre_usuario'] = $usuario['nombre'];
-        $_SESSION['rol'] = $usuario['rol'];
+        $_SESSION['username'] = $user['nombre'];
+        $_SESSION['rol'] = $user['rol'];
 
-        // Redirigir al menú principal
+        // Redirect to the main menu
         header('Location: /home');
         exit;
     } else {
-        // Credenciales inválidas, mostrar un mensaje de error
-        $error_message = "Credenciales incorrectas. Por favor, inténtalo de nuevo.";
+        // Invalid credentials, show an error message
+        $error_message = "Invalid credentials. Please try again.";
     }
 
-    // Cerrar la conexión a la base de datos
+    // Close the database connection
     $stmt->close();
     $mysqli->close();
 }
 
-include 'gestion_usuarios.php';
+include 'user_management.php';
 ?>
 
 <!DOCTYPE html>
@@ -56,21 +56,6 @@ include 'gestion_usuarios.php';
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="shortcut icon" href="./favicon.png">
-    <style>
-        #version,
-        #repo-version {
-            margin-top: 10px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .update-alert {
-            color: #ff0000;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-    </style>
 </head>
 <body>
     <div class="container">
@@ -83,8 +68,6 @@ include 'gestion_usuarios.php';
                 <p class="error-message"><?php echo $error_message; ?></p>
             <?php } ?>
             
-            <p id="version"></p>
-                <p id="repo-version"></p>
             <!-- Login form -->
             <form action="" method="POST">
                 <label for="username">Username:</label>
@@ -94,18 +77,12 @@ include 'gestion_usuarios.php';
                 <input type="password" id="password" name="password" required>
                 <br>
                 <input type="submit" value="Login">
-                <div></div>
-                <div></div>
                 <p id="creator">Created by: LaterVICTOR</p>
+                <p id="version"></p>
+                <p id="repo-version"></p>
+                <script src="update.js"></script>
             </form>
         </main>
     </div>
-    <footer>
-        <!-- Link de version repository -->
-        <script src="update.js"></script>
-    </footer>
 </body>
 </html>
-
-
-
