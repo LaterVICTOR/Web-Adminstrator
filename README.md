@@ -20,7 +20,7 @@ The status page offers a snapshot of the current system status. It may include c
 
 ## Styling Customization
 
-You can customize the colors in your styles using CSS variables. Edit the `style.css` file and find the `:root` block to update the color variables.
+You can customize the colors in your styles using CSS variables. Edit the `root.css` file and find the `:root` block to update the color variables.
 
 ```css
 :root {
@@ -47,7 +47,7 @@ CREATE TABLE chat_messages (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE users (
+CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
@@ -58,7 +58,7 @@ INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admi
 
 ## Nginx Server Configuration
 
-The Nginx server is configured to listen on port 80, with the root directory set to `/var/www/proyectos`. PHP scripts are passed to the FastCGI server, and specific parameters are adjusted to enhance performance and functionality.
+The Nginx server is configured to listen on port 80, with the root directory set to `/var/www/proyecs`. PHP scripts are passed to the FastCGI server, and specific parameters are adjusted to enhance performance and functionality.
 
 ### Installation
 
