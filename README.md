@@ -74,7 +74,7 @@ whitelist TEXT NOT NULL,
 whitelist_active TINYINT(1) NOT NULL DEFAULT 0
 );
 
-INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admin'); 
+INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admin'); # Creating the first user
 ```
 ```
 ## Nginx Server Configuration
