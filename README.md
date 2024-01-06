@@ -75,12 +75,12 @@ whitelist_active TINYINT(1) NOT NULL DEFAULT 0
 );
 
 INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admin'); 
-
+```
+```
 ## Nginx Server Configuration
 
 The Nginx server is configured to listen on port 80, with the root directory set to `/var/www/proyec`. PHP scripts are passed to the FastCGI server, and specific parameters are adjusted to enhance performance and functionality.
-```
-```
+
 ### Installation
 
 1. **Install Nginx:**
