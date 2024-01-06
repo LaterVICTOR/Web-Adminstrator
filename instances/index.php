@@ -46,111 +46,128 @@ HTML;
     exit;
 }
 
-// Database connection configuration
 $servername = "localhost";
 $username = "username";
 $password = "password";
-$dbname = "db_name";
+$dbname = "databasename";
 
-// Create connection
-$conexion = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conexion->connect_error) {
-    die("Database connection error: " . $conexion->connect_error);
+if ($conn->connect_error) {
+    die("Database connection error: " . $conn->connect_error);
 }
 
-// Function to retrieve messages
-function getMessages() {
-    global $conexion;
-    $query = "SELECT * FROM chat_messages ORDER BY timestamp DESC LIMIT 50";
-    $result = $conexion->query($query);
-    $messages = [];
-    while ($row = $result->fetch_assoc()) {
-        $messages[] = $row;
-    }
-    return array_reverse($messages);
-}
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_instance'])) {
+    $instance_name = $_POST['instance_name'];
+    $game_name = $_POST['game_name'];
+    $url = $_POST['url'];
+    $minecraft_version = $_POST['minecraft_version'];
+    $loader_type = $_POST['loader_type'];
+    $loader_version = $_POST['loader_version'];
+    $verify = isset($_POST['verify']) ? 1 : 0;
+    $ignored = $_POST['ignored'];
+    $whitelistArray = explode(',', $_POST['whitelist']);
+    $whitelist = implode(',', $whitelistArray);
+    $whitelist_active = isset($_POST['whitelist_active']) ? 1 : 0;
 
-// Function to add a message
-function addMessage($message) {
-    global $conexion;
-    $nombre_usuario = $_SESSION['nombre_usuario'];
-    $message = $conexion->real_escape_string($message);
-    $query = "INSERT INTO chat_messages (nombre_usuario, message_text) VALUES ('$nombre_usuario', '$message')";
-    return $conexion->query($query);
-}
+    $insert_query = "INSERT INTO games (instance_name, name, url, minecraft_version, loader_type, loader_version, verify, ignored, whitelist, whitelist_active)
+                     VALUES ('$instance_name', '$game_name', '$url', '$minecraft_version', '$loader_type', '$loader_version', $verify, '$ignored', '$whitelist', $whitelist_active)";
 
-// Process the form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $message = $_POST['mensaje'];
-
-    if (!empty($message)) {
-        addMessage($message);
+    if ($conn->query($insert_query) === TRUE) {
+        echo "Game instance added successfully.";
+    } else {
+        echo "Error adding game instance: " . $conn->error;
     }
 }
 
-// Get messages
-$messages = getMessages();
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['modify_instance'])) {
+    $instance_id = $_POST['instance_id'];
+    $instance_name = $_POST['instance_name'];
+    $game_name = $_POST['game_name'];
+    $url = $_POST['url'];
+    $minecraft_version = $_POST['minecraft_version'];
+    $loader_type = $_POST['loader_type'];
+    $loader_version = $_POST['loader_version'];
+    $verify = isset($_POST['verify']) ? 1 : 0;
+    $ignored = $_POST['ignored'];
+    $whitelistArray = explode(',', $_POST['whitelist']);
+    $whitelist = implode(',', $whitelistArray);
+    $whitelist_active = isset($_POST['whitelist_active']) ? 1 : 0;
+
+    $update_query = "UPDATE games SET
+        instance_name = '$instance_name',
+        name = '$game_name',
+        url = '$url',
+        minecraft_version = '$minecraft_version',
+        loader_type = '$loader_type',
+        loader_version = '$loader_version',
+        verify = $verify,
+        ignored = '$ignored',
+        whitelist = '$whitelist',
+        whitelist_active = $whitelist_active
+        WHERE id = $instance_id";
+
+    if ($conn->query($update_query) === TRUE) {
+        echo "Game instance modified successfully.";
+    } else {
+        echo "Error modifying game instance: " . $conn->error;
+    }
+}
+
+$select_query = "SELECT id, instance_name, name, url, minecraft_version, loader_type, loader_version, verify, ignored, whitelist, whitelist_active FROM games";
+$result = $conn->query($select_query);
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chat - Main Menu</title>
+    <title>Game Instances Configuration</title>
     <link rel="shortcut icon" href="../favicon.png">
-    <link rel="stylesheet" type="text/css" href="../style.css">
-    <style>
-        #chat-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        #chat-messages {
-            max-height: 300px;
-            overflow-y: scroll;
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        #chat-form {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        #chat-form input {
-            flex-grow: 1;
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../instances.css">
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-messages">
-            <?php foreach ($messages as $message): ?>
-                <p><strong><?= $message['nombre_usuario'] ?>:</strong> <?= $message['message_text'] ?></p>
-            <?php endforeach; ?>
-        </div>
-        <form id="chat-form" method="post" action="index.php">
-            <input type="text" name="mensaje" placeholder="Write a message" required>
-            <button type="submit">Send</button>
-        </form> 
-        <footer style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
-            <div style="margin-bottom: 10px;">
-                <a href="/home">Back to Main Menu</a>
-            </div>
-            <div>
-                <a href="/logout">Logout</a>
-            </div>
-        </footer>
-    </div>
-</body>
+<div class="container">
+    <h1>Game Instances Configuration</h1>
 
+    <div class="section">
+        <h2>Add Instance</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <label>Instance Name: <input type="text" name="instance_name" required></label>
+            <label>Game Name: <input type="text" name="game_name" required></label>
+            <label>URL: <input type="text" name="url" required></label>
+            <label>Minecraft Version: <input type="text" name="minecraft_version" required></label>
+            <label>Loader Type: <input type="text" name="loader_type" required></label>
+            <label>Loader Version: <input type="text" name="loader_version" required></label>
+            <label>Verify: <input type="checkbox" name="verify"></label>
+            <label>Ignored: <input type="text" name="ignored"></label>
+            <label>Whitelist: <input type="text" name="whitelist" placeholder="user1,user2,user3"></label>
+            <label>Whitelist Active: <input type="checkbox" name="whitelist_active"></label>
+            <input type="submit" name="add_instance" value="Add Instance">
+        </form>
+    </div>
+
+    <div class="section">
+        <h2>Modify Instance</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <label>Instance ID: <input type="text" name="instance_id" required></label>
+            <label>Instance Name: <input type="text" name="instance_name" required></label>
+            <label>Game Name: <input type="text" name="game_name" required></label>
+            <label>URL: <input type="text" name="url" required></label>
+            <label>Minecraft Version: <input type="text" name="minecraft_version" required></label>
+            <label>Loader Type: <input type="text" name="loader_type" required></label>
+            <label>Loader Version: <input type="text" name="loader_version" required></label>
+            <label>Verify: <input type="checkbox" name="verify"></label>
+            <label>Ignored: <input type="text" name="ignored"></label>
+            <label>Whitelist: <input type="text" name="whitelist" placeholder="user1,user2,user3"></label>
+            <label>Whitelist Active: <input type="checkbox" name="whitelist_active"></label>
+            <input type="submit" name="modify_instance" value="Modify Instance">
+        </form>
+    </div>
+</div>
+</body>
 </html>
 
 <?php
-// Close the database connection at the end of the script
-$conexion->close();
+$conn->close();
 ?>
