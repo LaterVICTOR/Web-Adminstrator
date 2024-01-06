@@ -41,7 +41,7 @@ This project requires a database to store chat messages and user information. He
 ```sql
 mysql -u root -p
 CREATE DATABASE NAME ## Create the Database user and Instances
-GRANT ALL PRIVILEGES ON DATABASENAME * TO 'user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON DATABASENAME * TO 'usernamedatabase '@'localhost' IDENTIFIED BY 'password';
 FLUSH PRIVILEGES;
 use usernamedatabase ## The user is what they put in the creation of Instances and User.
 
