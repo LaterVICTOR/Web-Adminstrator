@@ -39,6 +39,12 @@ You can customize the colors in your styles using CSS variables. Edit the `style
 This project requires a database to store chat messages and user information. Here are the SQL statements to create the necessary tables:
 
 ```sql
+mysql -u root -p
+CREATE DATABASE NAME ## Create the Database user and Instances
+GRANT ALL PRIVILEGES ON DATABASENAME * TO 'user'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+use usernamedatabase ## The user is what they put in the creation of Instances and User.
+
 CREATE TABLE chat_messages (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -47,7 +53,7 @@ CREATE TABLE chat_messages (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE users (
+CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
@@ -58,7 +64,7 @@ INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admi
 
 ## Nginx Server Configuration
 
-The Nginx server is configured to listen on port 80, with the root directory set to `/var/www/proyectos`. PHP scripts are passed to the FastCGI server, and specific parameters are adjusted to enhance performance and functionality.
+The Nginx server is configured to listen on port 80, with the root directory set to `/var/www/proyec`. PHP scripts are passed to the FastCGI server, and specific parameters are adjusted to enhance performance and functionality.
 
 ### Installation
 
