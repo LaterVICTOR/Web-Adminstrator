@@ -1,7 +1,6 @@
 # Nginx Configuration for Small Business Website
 
 ## Overview
-
 This Nginx configuration is designed for a small business website that serves as an online platform for administrators and users. The site includes a chat feature, a configuration zone, an admin zone, and a status page.
 
 ## Features
