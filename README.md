@@ -45,6 +45,13 @@ GRANT ALL PRIVILEGES ON DATABASENAME * TO 'user'@'localhost' IDENTIFIED BY 'pass
 FLUSH PRIVILEGES;
 use usernamedatabase ## The user is what they put in the creation of Instances and User.
 
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    contrasena VARCHAR(255) NOT NULL,
+    rol VARCHAR(20) NOT NULL
+);
+
 CREATE TABLE chat_messages (
     id INT PRIMARY KEY AUTO_INCREMENT,
     user_id INT,
@@ -53,11 +60,18 @@ CREATE TABLE chat_messages (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    contrasena VARCHAR(255) NOT NULL,
-    rol VARCHAR(20) NOT NULL
+CREATE TABLE juegos (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nombre_instancia VARCHAR(255) NOT NULL,
+nombre VARCHAR(255) NOT NULL,
+url VARCHAR(255) NOT NULL,
+minecraft_version VARCHAR(20) NOT NULL,
+loadder_type VARCHAR(20) NOT NULL,
+loadder_version VARCHAR(20) NOT NULL,
+verify TINYINT(1) NOT NULL DEFAULT 0,
+ignored TEXT NOT NULL,
+whitelist TEXT NOT NULL,
+whitelist_active TINYINT(1) NOT NULL DEFAULT 0
 );
 
 INSERT INTO usuarios (nombre, contrasena, rol) VALUES ('name', 'password', 'admin'); 
