@@ -20,7 +20,7 @@ The status page offers a snapshot of the current system status. It may include c
 
 ## Styling Customization
 
-You can customize the colors in your styles using CSS variables. Edit the `style.css` file and find the `:root` block to update the color variables.
+You can customize the colors in your styles using CSS variables. Edit the `root.css` file and find the `:root` block to update the color variables.
 
 ```css
 :root {
@@ -116,6 +116,7 @@ Make sure PHP is configured correctly, with the appropriate version and FastCGI 
 
 - Ensure that SSL is properly configured for secure communication.
 - Customize error handling and logging based on your preferences.
+- I am using CloudFlare Proxy to avoid creating the SSL the Nginx
 
 ## Additional Script
 
