@@ -2,7 +2,7 @@
 session_start();
 
 // Check if the user is authenticated in the PHP session
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+if ($_SESSION['rol'] !== 'admin') { {
     // If the user is not an administrator, send a 403 Forbidden response
     http_response_code(403);
 
